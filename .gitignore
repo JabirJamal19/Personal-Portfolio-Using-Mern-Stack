@@ -42,3 +42,14 @@ coverage/
 .cache/
 temp/
 tmp/
+
+# Documentation (keep only README.md)
+*_GUIDE.md
+*_SUMMARY.md
+*_SETUP.md
+*_FIXED.md
+*_TROUBLESHOOT.md
+QUICKSTART.md
+DEPLOYMENT.md
+CONTRIBUTING.md
+CHANGES*.md
