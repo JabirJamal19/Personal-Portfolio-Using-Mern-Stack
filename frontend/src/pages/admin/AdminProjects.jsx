@@ -6,6 +6,7 @@ import { FiPlus, FiEdit, FiTrash2, FiStar, FiArrowLeft } from 'react-icons/fi';
 import { projectsAPI } from '../../utils/api';
 import toast from 'react-hot-toast';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
+import ImageUpload from '../../components/common/ImageUpload';
 
 const AdminProjects = () => {
   const [projects, setProjects] = useState([]);
@@ -261,18 +262,26 @@ const AdminProjects = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-dark-700 mb-2">
-                      Image URL *
-                    </label>
-                    <input
-                      type="url"
-                      name="imageUrl"
-                      value={formData.imageUrl}
-                      onChange={handleChange}
-                      required
-                      className="input-field"
-                      placeholder="https://images.unsplash.com/..."
+                    <ImageUpload
+                      currentImage={formData.imageUrl}
+                      onImageUploaded={(url) => setFormData(prev => ({ ...prev, imageUrl: url }))}
+                      label="Project Image *"
                     />
+                    
+                    {/* Optional: Keep URL field for manual entry */}
+                    <div className="mt-4">
+                      <label className="block text-sm font-medium text-dark-700 mb-2">
+                        Or paste Image URL
+                      </label>
+                      <input
+                        type="url"
+                        name="imageUrl"
+                        value={formData.imageUrl}
+                        onChange={handleChange}
+                        className="input-field"
+                        placeholder="https://images.unsplash.com/..."
+                      />
+                    </div>
                   </div>
                 </div>
 

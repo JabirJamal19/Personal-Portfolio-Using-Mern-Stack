@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { FiArrowLeft, FiPlus, FiEdit2, FiTrash2, FiX } from 'react-icons/fi';
 import { blogAPI } from '../../utils/api';
 import toast from 'react-hot-toast';
+import ImageUpload from '../../components/common/ImageUpload';
 
 const AdminBlogs = () => {
   const navigate = useNavigate();
@@ -293,28 +294,28 @@ const AdminBlogs = () => {
                   />
                 </div>
 
-                {/* Image URL */}
+                {/* Image Upload */}
                 <div>
-                  <label className="block text-sm font-medium text-dark-700 mb-2">
-                    Featured Image URL *
-                  </label>
-                  <input
-                    type="url"
-                    name="image"
-                    value={formData.image}
-                    onChange={handleInputChange}
-                    required
-                    className="input-field"
-                    placeholder="https://images.unsplash.com/photo-..."
+                  <ImageUpload
+                    currentImage={formData.image}
+                    onImageUploaded={(url) => setFormData(prev => ({ ...prev, image: url }))}
+                    label="Featured Image *"
                   />
-                  {formData.image && (
-                    <img
-                      src={formData.image}
-                      alt="Preview"
-                      className="mt-3 w-full h-48 object-cover rounded-lg"
-                      onError={(e) => e.target.src = 'https://via.placeholder.com/800x400?text=Invalid+Image+URL'}
+                  
+                  {/* Optional: Keep URL field for manual entry */}
+                  <div className="mt-4">
+                    <label className="block text-sm font-medium text-dark-700 mb-2">
+                      Or paste Image URL
+                    </label>
+                    <input
+                      type="url"
+                      name="image"
+                      value={formData.image}
+                      onChange={handleInputChange}
+                      className="input-field"
+                      placeholder="https://images.unsplash.com/photo-..."
                     />
-                  )}
+                  </div>
                 </div>
 
                 {/* Tags */}

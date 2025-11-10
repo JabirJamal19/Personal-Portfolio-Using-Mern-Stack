@@ -9,6 +9,7 @@ import projectRoutes from './routes/projectRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
 import blogRoutes from './routes/blogRoutes.js';
 import authRoutes from './routes/authRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -59,6 +60,7 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/blog', blogRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/upload', uploadRoutes);
 
 // Root endpoint - Welcome message
 app.get('/', (req, res) => {
