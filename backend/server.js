@@ -60,6 +60,22 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/blog', blogRoutes);
 app.use('/api/auth', authRoutes);
 
+// Root endpoint - Welcome message
+app.get('/', (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    message: 'Portfolio API Server',
+    version: '1.0.0',
+    endpoints: {
+      health: '/api/health',
+      projects: '/api/projects',
+      blog: '/api/blog',
+      contact: '/api/contact',
+      auth: '/api/auth'
+    }
+  });
+});
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.status(200).json({ 
@@ -73,7 +89,8 @@ app.get('/api/health', (req, res) => {
 app.use((req, res) => {
   res.status(404).json({ 
     status: 'error', 
-    message: 'Route not found' 
+    message: 'Route not found',
+    availableRoutes: ['/api/health', '/api/projects', '/api/blog', '/api/contact', '/api/auth']
   });
 });
 
