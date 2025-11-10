@@ -7,12 +7,13 @@ const Hero = () => {
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 via-white to-primary-50 pt-20">
       <div className="container-custom">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="flex flex-col lg:flex-row gap-12 items-center">
           {/* Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
+            className="order-2 lg:order-1 w-full lg:w-1/2 text-center lg:text-left"
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -70,7 +71,7 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7 }}
-              className="flex gap-4"
+              className="flex gap-4 justify-center lg:justify-start"
             >
               <a
                 href={profileData.social.github}
@@ -107,9 +108,9 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative"
+            className="relative order-1 lg:order-2 w-full lg:w-1/2"
           >
-            <div className="relative w-full aspect-square max-w-md mx-auto">
+            <div className="relative w-full aspect-square max-w-xs sm:max-w-sm md:max-w-md mx-auto">
               {/* Animated gradient rings */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full opacity-20 blur-3xl animate-pulse"></div>
               <div className="absolute -inset-4 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full opacity-30 blur-2xl animate-spin-slow"></div>
