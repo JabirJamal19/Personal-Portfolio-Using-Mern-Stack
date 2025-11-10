@@ -13,6 +13,7 @@ import Contact from './pages/Contact';
 import Login from './pages/admin/Login';
 import Dashboard from './pages/admin/Dashboard';
 import AdminProjects from './pages/admin/AdminProjects';
+import AdminBlogs from './pages/admin/AdminBlogs';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route path="/admin/login" element={<Login />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/projects" element={<AdminProjects />} />
+          <Route path="/admin/blogs" element={<AdminBlogs />} />
           
           <Route path="*" element={<NotFound />} />
         </Routes>
