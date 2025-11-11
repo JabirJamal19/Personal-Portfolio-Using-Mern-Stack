@@ -15,7 +15,7 @@ const Projects = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
 
-  const categories = ['All', 'Frontend', 'Backend', 'Full Stack', 'Mobile', 'Other'];
+  const categories = ['All', 'Frontend', 'Backend', 'Full Stack', 'Wordpress', 'Other'];
 
   useEffect(() => {
     fetchProjects();

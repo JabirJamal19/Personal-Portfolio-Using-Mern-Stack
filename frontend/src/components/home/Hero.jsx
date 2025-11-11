@@ -100,6 +100,15 @@ const Hero = () => {
               >
                 <FiTwitter />
               </a>
+              <a
+                href={profileData.social.fiverr}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-3xl text-dark-700 hover:text-primary-600 transition-colors"
+                aria-label="Fiverr"
+              >
+                <Fifiverr />
+              </a>
             </motion.div>
           </motion.div>
 
