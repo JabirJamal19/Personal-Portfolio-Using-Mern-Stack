@@ -2,29 +2,44 @@ import { v2 as cloudinary } from 'cloudinary';
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import multer from 'multer';
 
-// Configure Cloudinary
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
-});
+// Check if Cloudinary credentials are configured
+const isCloudinaryConfigured = 
+  process.env.CLOUDINARY_CLOUD_NAME && 
+  process.env.CLOUDINARY_API_KEY && 
+  process.env.CLOUDINARY_API_SECRET;
 
-// Configure Cloudinary Storage for Multer
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'portfolio', // Folder name in Cloudinary
-    allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
-    transformation: [{ width: 1200, height: 800, crop: 'limit' }] // Optimize images
-  }
-});
+let upload = null;
 
-// Create multer upload middleware
-export const upload = multer({ 
-  storage: storage,
-  limits: {
-    fileSize: 5 * 1024 * 1024 // 5MB max file size
-  }
-});
+if (isCloudinaryConfigured) {
+  // Configure Cloudinary
+  cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+  });
 
+  // Configure Cloudinary Storage for Multer
+  const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+      folder: 'portfolio',
+      allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
+      transformation: [{ width: 1200, height: 800, crop: 'limit' }]
+    }
+  });
+
+  // Create multer upload middleware
+  upload = multer({ 
+    storage: storage,
+    limits: {
+      fileSize: 5 * 1024 * 1024 // 5MB max file size
+    }
+  });
+
+  console.log('✅ Cloudinary configured successfully');
+} else {
+  console.log('⚠️  Cloudinary not configured - Image upload will be disabled');
+}
+
+export { upload, isCloudinaryConfigured };
 export default cloudinary;

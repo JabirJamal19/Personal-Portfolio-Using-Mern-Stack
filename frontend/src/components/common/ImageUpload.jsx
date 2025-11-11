@@ -58,7 +58,15 @@ const ImageUpload = ({ currentImage, onImageUploaded, label = "Upload Image" }) 
       toast.success('Image uploaded successfully!');
     } catch (error) {
       console.error('Upload error:', error);
-      toast.error(error.response?.data?.message || 'Failed to upload image');
+      const errorMessage = error.response?.data?.message || 'Failed to upload image';
+      
+      // If Cloudinary is not configured, show helpful message
+      if (error.response?.status === 503) {
+        toast.error('Image upload not configured. Please paste image URL instead.');
+      } else {
+        toast.error(errorMessage);
+      }
+      
       setPreview(currentImage || '');
     } finally {
       setUploading(false);
