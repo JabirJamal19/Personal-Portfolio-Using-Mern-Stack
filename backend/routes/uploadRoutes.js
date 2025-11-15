@@ -1,6 +1,6 @@
 import express from 'express';
 import { upload, isCloudinaryConfigured } from '../config/cloudinary.js';
-import { protect, admin } from '../middleware/auth.js';
+import { protect, adminOnly } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -16,7 +16,7 @@ const checkUploadAvailable = (req, res, next) => {
 };
 
 // Upload single image
-router.post('/image', protect, admin, checkUploadAvailable, (req, res, next) => {
+router.post('/image', protect, adminOnly, checkUploadAvailable, (req, res, next) => {
   if (!upload) {
     return res.status(503).json({
       status: 'error',
@@ -57,7 +57,7 @@ router.post('/image', protect, admin, checkUploadAvailable, (req, res, next) => 
 });
 
 // Upload multiple images
-router.post('/images', protect, admin, checkUploadAvailable, (req, res, next) => {
+router.post('/images', protect, adminOnly, checkUploadAvailable, (req, res, next) => {
   if (!upload) {
     return res.status(503).json({
       status: 'error',
